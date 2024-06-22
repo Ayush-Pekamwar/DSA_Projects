@@ -249,62 +249,6 @@ void MetroLine::populateLine(string filename)
     }
 }
 
-char flashbang()
-{
-    char ch = 'f';
-    char ch1 = 'l';
-    char ch2 = 'a';
-    char ch3 = 's';
-    char ch4 = 'h';
-
-    ch1 = ch2;
-    ch2 = ch3 + 1;
-
-    for (int i = 0; i < 9; i++)
-    {
-        ch4++;
-    }
-
-    return ch3;
-}
-
-int swap(int *p1, int *p2)
-{
-    int temp;
-    temp = *p1;
-    *p1 = *p2;
-    *p2 = temp;
-
-    return 0;
-}
-
-char flashbang_2()
-{
-    char ch = 'f';
-    char ch1 = 'l';
-    char ch3 = 'a';
-    char ch2 = 's';
-    int ch4 = 12;
-
-    ch1 = ch2;
-    ch2 = ch3 + 1;
-
-    return ch3;
-}
-
-string smoke()
-{
-    long int duh = 134;
-    long int radii = 98;
-
-    duh = duh + radii;
-    duh++;
-    duh = abs(duh);
-    duh = abs(duh) + radii;
-    string lol = "smoke";
-    return lol;
-}
-
 // AVLNode class
 class AVLNode
 {
@@ -465,18 +409,15 @@ AVLNode *AVLTree ::rotateLeft(AVLNode *x)
 {
     if (x == nullptr || x->getRight() == nullptr)
     {
-        flashbang_2();
         return x;
     }
 
-    flashbang();
     AVLNode *y = x->getRight();
     AVLNode *T2 = y->getLeft();
 
     // Perform rotation
     y->setLeft(x);
     x->setRight(T2);
-    smoke();
 
     return y;
 }
@@ -486,17 +427,14 @@ AVLNode *AVLTree::rotateRight(AVLNode *y)
     if (y == nullptr || y->getLeft() == nullptr)
     {
 
-        flashbang();
         return y;
     }
 
     AVLNode *x = y->getLeft();
     AVLNode *T2 = x->getRight();
-    flashbang_2();
 
     // Perform rotation
     x->setRight(y);
-    smoke();
     y->setLeft(T2);
 
     return x;
@@ -519,13 +457,11 @@ AVLNode *AVLTree::balance(AVLNode *node)
     {
         if (height(node->getLeft()->getLeft()) >= height(node->getLeft()->getRight()))
         {
-            flashbang();
+
             return rotateRight(node);
         }
         else
         {
-
-            flashbang();
 
             node->setLeft(rotateLeft(node->getLeft()));
             return rotateRight(node);
@@ -535,13 +471,11 @@ AVLNode *AVLTree::balance(AVLNode *node)
     {
         if (height(node->getRight()->getRight()) >= height(node->getRight()->getLeft()))
         {
-            flashbang();
 
             return rotateLeft(node);
         }
         else
         {
-            flashbang_2();
 
             node->setRight(rotateRight(node->getRight()));
             return rotateLeft(node);
@@ -558,7 +492,7 @@ AVLNode *AVLTree::insert(AVLNode *root, MetroStop *metroStop)
     {
         AVLNode *newnode = new AVLNode(metroStop->getStopName());
         newnode->addMetroStop(metroStop);
-        smoke();
+
         return newnode;
     }
 
@@ -566,12 +500,12 @@ AVLNode *AVLTree::insert(AVLNode *root, MetroStop *metroStop)
 
     if (val < 0)
     {
-        smoke();
+
         root->setLeft(insert(root->getLeft(), metroStop));
     }
     else if (val > 0)
     {
-        flashbang();
+
         root->setRight(insert(root->getRight(), metroStop));
     }
     else if (val == 0)
@@ -583,7 +517,6 @@ AVLNode *AVLTree::insert(AVLNode *root, MetroStop *metroStop)
 
     // return root;
     // Balancing the tree after insertion
-    flashbang();
     return balance(root);
 }
 
@@ -598,11 +531,9 @@ void AVLTree::populateTree(MetroLine *metroLine)
         // avl_tree->insert(avl_tree->getRoot(),msnode);
         // cout<<msnode->getStopName()<<" ";
         // cout<<"bruh"<<" ";
-        flashbang_2();
         this->setRoot(this->insert(this->getRoot(), msnode));
         // inOrderTraversal(root);
         msnode = msnode->getNextStop();
-        flashbang();
     }
 }
 
@@ -621,7 +552,7 @@ int AVLTree::getTotalNodes(AVLNode *node)
 {
     if (node == nullptr)
     {
-        flashbang();
+
         return 0;
     }
     return 1 + getTotalNodes(node->getLeft()) + getTotalNodes(node->getRight());
@@ -634,7 +565,6 @@ AVLNode *AVLTree::searchStop(string stopName)
     short int val = stringCompare(stopName, node->getStopName());
     while (node != nullptr && stringCompare(stopName, node->getStopName()) != 0)
     {
-        flashbang();
         if (stringCompare(stopName, node->getStopName()) > 0)
         {
             node = node->getRight();
@@ -644,7 +574,7 @@ AVLNode *AVLTree::searchStop(string stopName)
             node = node->getLeft();
         }
     }
-    smoke();
+
     return node;
 }
 
@@ -704,19 +634,6 @@ public:
     void enqueue(Trip *trip);
     Trip *dequeue();
     bool isEmpty() const;
-
-    void printQueue()
-    {
-        while (!isEmpty())
-        {
-            cout << dequeue() << endl;
-        }
-    }
-
-    int printSize()
-    {
-        return trips.size();
-    }
 };
 
 Exploration::Exploration()
@@ -897,7 +814,6 @@ Path *PathFinder::findPath(string origin, string destination)
         {
             Trip *currentTrip = exp->dequeue();
             // MetroStop* currentStop = currentTrip->getNode();
-            // cout<<"bruh"<<endl;
 
             while (currentTrip->getNode() != nullptr)
             {
@@ -905,11 +821,10 @@ Path *PathFinder::findPath(string origin, string destination)
                 if (currentTrip->getNode()->getStopName() == destination)
                 {
                     // destination found , ab path bana ke return kar de
-                    // cout << "inside..." << endl;
-
+                    //  cout<<"inside..."<<endl;
                     while (currentTrip != nullptr)
                     {
-                        cout << "adding trip..." << endl;
+                        // cout<<"adding trip..."<<endl;
                         finalPath->addStop(currentTrip->getNode());
                         currentTrip = currentTrip->getPrev();
                     }
@@ -920,10 +835,10 @@ Path *PathFinder::findPath(string origin, string destination)
                     // long int finalfare = computefare(stopsforfare);
                     // cout<<computefare(stopsforfare)<<endl;
                     // finalPath->setTotalFare(finalfare);
-                    // cout<<stopsforfare.size();
-                    for (int l = 0; l < stopsforfare.size() - 1; l++)
+
+                    for (int l = 0; i < stopsforfare.size(); i++)
                     {
-                        // cout<<"ahhh whyy"<<endl;
+                        // cout<<"hug kyu raha hai bsdk"<<endl;
                         int temp = stopsforfare[l + 1]->getFare() - stopsforfare[l]->getFare();
                         // cout<<temp<<endl;
                         finalfare = finalfare + abs(temp);
@@ -942,15 +857,12 @@ Path *PathFinder::findPath(string origin, string destination)
 
                         Trip *tempTrip = new Trip(currentTrip->getNode()->getNextStop(), currentTrip, 1);
                         currentTrip = tempTrip;
-                        // cout<<currentTrip->getNode()->getStopName()<<endl;
-                        // exp->printQueue();
                     }
                     if (currentTrip->flag == 0)
                     {
                         // backward traversal
                         Trip *tempTrip = new Trip(currentTrip->getNode()->getPrevStop(), currentTrip, 0);
                         currentTrip = tempTrip;
-                        // cout<<currentTrip->getNode()->getStopName()<<endl;
                     }
 
                     // checking if currentTrip pointer has more than one stops in its avl node
@@ -964,24 +876,16 @@ Path *PathFinder::findPath(string origin, string destination)
                         // then av node is a junction
                         for (int k = 0; k < avstops.size(); k++)
                         {
-                            Trip *forwardwala = new Trip(avstops[k], currentTrip, 1);
-                            Trip *backwardwala = new Trip(avstops[k], currentTrip, 0);
+                            Trip *forwardwala = new Trip(avstops[i], currentTrip, 1);
+                            Trip *backwardwala = new Trip(avstops[i], currentTrip, 0);
                             exp->enqueue(forwardwala);
                             exp->enqueue(backwardwala);
                         }
                     }
                 }
-                // cout << "phele ye tha " << exp->printSize() << endl;
             }
-            // cout << "ab ye hai bruhhhhh ";
-            // cout << "bruhhhhh ";
-            // cout << exp->printSize() << endl;
-            // exp->printQueue(); // yaha print nhi hora
-            // exp->dequeue();
         }
     }
-
-    return nullptr;
 }
 
 vector<MetroLine *> lines;
